@@ -11,8 +11,9 @@ import {
 } from "@material-ui/core";
 import colors from "../constants/colors";
 import Status from "./Status";
+import Blocks from './Blocks'
 
-const Node = ({ node, expanded, toggleNodeExpanded }) => {
+const Node = ({ node, expanded, toggleNodeExpanded, blocks }) => {
   const classes = useStyles();
   return (
     <Accordion
@@ -45,8 +46,8 @@ const Node = ({ node, expanded, toggleNodeExpanded }) => {
           <Status loading={node.loading} online={node.online} />
         </Box>
       </AccordionSummary>
-      <AccordionDetails>
-        <Typography>Blocks go here</Typography>
+      <AccordionDetails className={classes.accordionDetails}>
+        <Blocks blocks={blocks} />
       </AccordionDetails>
     </Accordion>
   );
@@ -96,6 +97,10 @@ const useStyles = makeStyles((theme) => ({
     color: colors.faded,
     lineHeight: 2,
   },
+  accordionDetails :{
+    display: 'flex',
+    flexDirection: 'column'
+  }
 }));
 
 Node.propTypes = {

@@ -1,5 +1,6 @@
 const colors = {
   text: "#263238",
+  text2: "#304FFE",
   faded: "#8a9094",
   primary: "#5bb7db",
   danger: "#D94238",

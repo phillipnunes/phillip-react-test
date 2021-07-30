@@ -92,4 +92,76 @@ describe('Reducers::Nodes', () => {
 
     expect(reducer(appState, action)).toEqual(expected);
   });
+
+
+  it('should handle GET_BLOCKS_FROM_NODE_START', () => {
+    const appState = {
+      list: [nodeA, nodeB]
+    };
+    const action = { type: ActionTypes.GET_BLOCKS_FROM_NODE_START, node: nodeA };
+    const expected = {
+      list: [
+        {
+          ...nodeA,
+          blocks: {
+            loading: true
+          }
+        },
+        nodeB
+      ]
+    };
+
+    expect(reducer(appState, action)).toEqual(expected);
+  });
+
+  it('should handle GET_BLOCKS_FROM_NODE_SUCCESS', () => {
+    const appState = {
+      list: [nodeA, nodeB]
+    };
+    const action = { type: ActionTypes.GET_BLOCKS_FROM_NODE_SUCCESS, node: nodeA, res: {node_name: 'alpha'} };
+    const expected = {
+      list: [
+        {
+          ...nodeA,
+          blocks: {
+            loading: false,
+            error: false
+          }
+        },
+        nodeB
+      ]
+    };
+
+    expect(reducer(appState, action)).toEqual(expected);
+  });
+
+  it('should handle GET_BLOCKS_FROM_NODE_FAILURE', () => {
+    const appState = {
+      list: [
+        {
+          ...nodeA,
+          blocks: {
+            loading: false,
+            error: false
+          }
+        },
+        nodeB
+      ]
+    };
+    const action = { type: ActionTypes.GET_BLOCKS_FROM_NODE_FAILURE, node: nodeA };
+    const expected = {
+      list: [
+        {
+          ...nodeA,
+          blocks: {
+            loading: false,
+            error: true
+          }
+        },
+        nodeB
+      ]
+    };
+
+    expect(reducer(appState, action)).toEqual(expected);
+  });
 });

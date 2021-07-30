@@ -18,13 +18,37 @@ describe("<Nodes />", () => {
         url: 'https://thawing-springs-53971.herokuapp.com',
         online: false,
         name: 'Node 1',
-        loading: false
+        loading: false,
+        blocks: {
+          loading: false,
+          list: [
+            {
+              id: 1,
+              attributes: {
+                index: 1,
+                data: 'Test'
+              }
+            }
+          ]
+        }
       },
       {
         url: 'https://secret-lowlands-62331.herokuapp.com',
         online: false,
         name: 'Node 2',
-        loading: false
+        loading: false,
+        blocks: {
+          loading: false,
+          list: [
+            {
+              id: 1,
+              attributes: {
+                index: 1,
+                data: 'Test'
+              }
+            }
+          ]
+        }
       }
     ]
   };
@@ -32,6 +56,10 @@ describe("<Nodes />", () => {
   it("should contain <Node />", () => {
     const wrapper = shallow(
       <Nodes
+        nodesActions={{
+          checkNodeStatuses: jest.fn()
+        }}
+        blocksActions={{}}
         actions={actions}
         nodes={nodes}
       />
